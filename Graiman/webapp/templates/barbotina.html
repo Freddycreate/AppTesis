@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block content %}
+<h5>CONTROL BARBOTINAS</h5>
+<div>
+     <a class="btn btn-secondary btn-sm" style="width: 60px;" href="crear_registro"><i class="fa fa-plus" aria-hidden="true"></i></a>
+</div>
+<br>
+   <table id="tabla_barbotina" class="table table-striped" style="width:100%">
+        <thead>
+        <tr>
+            <th>id</th>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Densidad(g/cm3)</th>
+            <th>Viscosidad(seg)</th>
+            <th>Residuo(g)</th>
+            <th>Planta</th>
+            <th>Responsable</th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for bar in Bar %}
+        <tr>
+            <td>{{bar.id}}</td>
+            <td>{{bar.fecha}}</td>
+            <td>{{bar.hora}}</td>
+            <td>{{bar.densidad}}</td>
+            <td>{{bar.viscosidad}}</td>
+            <td>{{bar.residuo}}</td>
+            <td>{{bar.planta}}</td>
+            <td>{{bar.usuario}}</td>
+            <td style="width: 3%;"><a href="detalle_registro/{{bar.id}}"> <i class='fa-solid fa-eye'></i> </a></td>
+            <td style="width: 5%;"><a href="editar_registro/{{bar.id}}"><i class='fa-solid fa-pen' ></i></a></td>
+            <td style="width: 5%;"><a  class='btn btn-sm btn-danger'  href="delete_registro/{{bar.id}}"><i class='fa-solid fa-trash-can'></i></a></a></td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <script>
+   $("#tabla_barbotina").DataTable({
+      pagin: true,
+      pageLength:10,
+      lengthChange: true,
+      autoWidth: true,
+      searching: true,
+      bInfo: true,
+      bSort: true,
+      scrollX: true,
+      fixedHeader: true,
+       dom: 'Bfrtilp',
+       buttons: [
+          {
+            extend: 'excelHtml5',
+            text: '<i class="fas fa-file-excel"></i> ',
+            titleAttr: 'Exportar a Excel',
+            className: 'btn btn-success',
+          },
+          {
+            extend: 'pdfHtml5',
+            text: '<i class="fas fa-file-pdf"></i> ',
+            titleAttr: 'Exportar a PDF',
+            className: 'btn btn-danger',
+          },
+          {
+            extend: 'print',
+            text: '<i class="fa fa-print"></i> ',
+            titleAttr: 'Imprimir',
+            className: 'btn btn-info',
+          },
+        ],
+       columDefs:[
+       { className: "centered", targets: [0, 1, 2, 3, 4, 5, 6, 7] },
+       { orderable: false, targets: [7, 8] },
+       {searchable: false, targets: [0, 2, 3, 4] }
+       ],
+           language: {
+           lengthMenu: "Mostrar _MENU_ registros por página",
+           zeroRecords: "Ningún usuario encontrado",
+           info: "Mostrando del _START_ al _END_ de un total de _TOTAL_ registros",
+           infoEmpty: "Ningún usuario encontrado",
+           infoFiltered: "(filtrados desde _MAX_ registros totales)",
+           search: "Buscar",
+           loadingRecords: "Cargando ..",
+           paginate: {
+               firts: "Primero",
+               last: "último",
+               next: "Siguiente",
+               previous: "Anterior"
+           }
+       }
+   });
+</script>
+ {% endblock %}

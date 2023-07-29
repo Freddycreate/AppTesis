@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+    <title>Detalle de Silos Atomizados</title>
+
+<body>
+  <h5>Detalle del polvo Atomizado</h5>
+  <div>fecha: {{silos.fecha}}</div>
+  <div>hora: {{silos.hora}}</div>
+  <div>codigo: {{silos.codigo}}</div>
+  <div>planta: {{silos.planta}}</div>
+  <div>nroSilo: {{silos.nroSilo}}</div>
+  <div>humedad: {{silos.humedad}}</div>
+  <div>usuario: {{silos.usuario}}</div>
+  <div>granulometria: {{silos.granulometria}}</div>
+  <div>barbotina: {{silos.barbotina}}</div>
+  <div>observaciones: {{silos.observaciones}}</div>
+</body>
+{% endblock %}

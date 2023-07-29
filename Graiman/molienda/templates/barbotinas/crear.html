@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    <title>crear Registro</title>
+<body>
+<form method="POST">
+  <h1>Agregar Registro </h1>
+  <table>
+      {{formaBar}}
+  </table>
+    <button type="submit">Enviar</button>
+    {%csrf_token%}
+</form>
+</body>
+{% endblock %}

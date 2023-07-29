@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% block content %}
+    <title>Gráfico de Líneas</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<center><h6> Control de Parámetros de la Barbotina </h6></center>
+<body>
+    <div id="chart"></div>
+
+    <script>
+
+        var datos_grafico = {{ datos_grafico|safe }};
+
+      var options = {
+  chart: {
+    height: 350,
+    type: "line",
+    stacked: false
+  },
+  dataLabels: {
+    enabled: false
+  },
+  colors: ["#FF1654", "#247BA0"],
+  series: [
+    {
+      name: "Viscosidad",
+      data: datos_grafico.viscosidades
+    },
+    {
+      name: "Residuo",
+      data: datos_grafico.residuos
+    }
+  ],
+  stroke: {
+    width: [1, 1]
+  },
+  plotOptions: {
+    bar: {
+      columnWidth: "40%"
+    }
+  },
+  xaxis: {
+    categories: datos_grafico.labels
+  },
+  yaxis: [
+    {
+      axisTicks: {
+        show: true
+      },
+      axisBorder: {
+        show: true,
+        color: "#FF1654"
+      },
+      labels: {
+        style: {
+          colors: "#FF1654"
+        }
+      },
+      title: {
+        text: "Viscosidad",
+        style: {
+          color: "#FF1654"
+        }
+      }
+    },
+    {
+      opposite: true,
+      axisTicks: {
+        show: true
+      },
+      axisBorder: {
+        show: true,
+        color: "#247BA0"
+      },
+      labels: {
+        style: {
+          colors: "#247BA0"
+        }
+      },
+      title: {
+        text: "Residuo",
+        style: {
+          color: "#247BA0"
+        }
+      }
+    }
+  ],
+  tooltip: {
+    shared: false,
+    intersect: true,
+    x: {
+      show: false
+    }
+  },
+  legend: {
+    horizontalAlign: "left",
+    offsetX: 40
+  }
+};
+
+var chart = new ApexCharts(document.querySelector("#chart"), options);
+
+chart.render();
+
+    </script>
+</body>
+{% endblock %}
+

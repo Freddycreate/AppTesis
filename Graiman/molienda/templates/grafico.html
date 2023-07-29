@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+    <title>Gráfico de Líneas</title>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<body>
+    <div id="chart"></div>
+
+        <script>
+        var datos_grafico = {{ datos_grafico|safe }};
+
+        var options = {
+          series: [{
+            name: "Humedades",
+            data: datos_grafico.humedades
+        }],
+          chart: {
+          height: 350,
+          type: 'line',
+          zoom: {
+            enabled: false
+          }
+        },
+        dataLabels: {
+          enabled: false
+        },
+        stroke: {
+          curve: 'straight'
+        },
+        title: {
+          text: 'Control de Humedades Silos Atomizados',
+          align: 'Center'
+        },
+        grid: {
+          row: {
+            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+            opacity: 0.5
+          },
+        },
+        xaxis: {
+          categories: datos_grafico.labels
+        }
+        };
+
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+
+    </script>
+</body>
+{% endblock %}
+

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    <title>Edit Registro</title>
+<body>
+<form method="POST">
+  <h1>Edit Registro </h1>
+  <table>
+      {{formaBar}}
+  </table>
+    <button type="submit">Enviar</button>
+    {%csrf_token%}
+</form>
+</body>
+{% endblock %}
