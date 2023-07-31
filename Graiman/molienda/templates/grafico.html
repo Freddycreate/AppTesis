@@ -2,49 +2,79 @@
 {% block content %}
     <title>Gráfico de Líneas</title>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<body>
-    <div id="chart"></div>
+    <body>
+    <br>
+     <h6><b>Seleccione el rango de fecha</b></h6>
+    <br>
+        <div>
+            <label for="start_date">Fecha de inicio:</label>
+            <input type="date" id="start_date">
+            <label for="end_date">Fecha de fin:</label>
+            <input type="date" id="end_date">
+            <button onclick="filterData()">Filtrar</button>
+        </div>
+    <br><br>
+        <div id="chart"></div>
 
         <script>
-        var datos_grafico = {{ datos_grafico|safe }};
+            var datos_grafico = {{ datos_grafico|safe }};
+            var initialLabels = datos_grafico.labels;
+            var initialHumedades = datos_grafico.humedades;
 
-        var options = {
-          series: [{
-            name: "Humedades",
-            data: datos_grafico.humedades
-        }],
-          chart: {
-          height: 350,
-          type: 'line',
-          zoom: {
-            enabled: false
-          }
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          curve: 'straight'
-        },
-        title: {
-          text: 'Control de Humedades Silos Atomizados',
-          align: 'Center'
-        },
-        grid: {
-          row: {
-            colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-            opacity: 0.5
-          },
-        },
-        xaxis: {
-          categories: datos_grafico.labels
-        }
-        };
+            function filterData() {
+                var start_date = document.getElementById('start_date').value;
+                var end_date = document.getElementById('end_date').value;
 
-        var chart = new ApexCharts(document.querySelector("#chart"), options);
-        chart.render();
+                var filteredLabels = [];
+                var filteredHumedades = [];
 
-    </script>
-</body>
+                for (var i = 0; i < initialLabels.length; i++) {
+                    if (start_date <= initialLabels[i] && initialLabels[i] <= end_date) {
+                        filteredLabels.push(initialLabels[i]);
+                        filteredHumedades.push(initialHumedades[i]);
+                    }
+                }
+
+                var options = {
+                    series: [{
+                        name: "Humedades",
+                        data: filteredHumedades
+                    }],
+                    chart: {
+                        height: 350,
+                        type: 'line',
+                        zoom: {
+                            enabled: false
+                        }
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    stroke: {
+                        curve: 'straight'
+                    },
+                    title: {
+                        text: 'Control de Humedades Silos Atomizados',
+                        align: 'center'
+                    },
+                    grid: {
+                        row: {
+                            colors: ['#f3f3f3', 'transparent'],
+                            opacity: 0.5
+                        },
+                    },
+                    xaxis: {
+                        categories: filteredLabels
+                    }
+                };
+
+                var chart = new ApexCharts(document.querySelector("#chart"), options);
+                chart.render();
+            }
+
+            // Render the initial chart on page load
+            filterData();
+
+        </script>
+    </body>
 {% endblock %}
-

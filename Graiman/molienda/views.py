@@ -2,8 +2,7 @@ from django.contrib.auth import logout
 from django.shortcuts import render, get_object_or_404, redirect
 from Graiman.forms import AtomizadoForm, BarbotinaForm, GranulometriaForm
 from molienda.models import Atomizado, Barbotina, Granulometria
-from django.http import HttpResponseRedirect
-from django.contrib import messages
+from django.utils import timezone
 
 # Create your views here.
 
@@ -140,8 +139,14 @@ def borrarRegistro(request, id):
 
 
 
-def grafAtomizado(request):
+def grafAtomizado(request, start_date=None, end_date=None):
     atomizado = Atomizado.objects.all()
+
+    if start_date:
+        atomizado = atomizado.filter(fecha__gte=start_date)
+    if end_date:
+        atomizado = atomizado.filter(fecha__lte=end_date)
+
     labels = [dato.fecha.strftime('%Y-%m-%d') for dato in atomizado]
     humedades = [dato.humedad for dato in atomizado]
     nro_silos = [dato.nroSilo for dato in atomizado]
@@ -149,14 +154,23 @@ def grafAtomizado(request):
     return render(request, 'grafico.html', {'datos_grafico': datos_grafico})
 
 
-def grafBarbotina(request):
+def grafBarbotina(request, start_date=None, end_date=None):
     barbotina = Barbotina.objects.all()
+
+    if start_date:
+        barbotina = barbotina.filter(fecha__gte=start_date)
+    if end_date:
+        barbotina = barbotina.filter(fecha__lte=end_date)
+
     labels = [dato.fecha.strftime('%Y-%m-%d') for dato in barbotina]
     densidades = [float(dato.densidad) for dato in barbotina]
     viscosidades = [dato.viscosidad for dato in barbotina]
     residuos = [float(dato.residuo) for dato in barbotina]
     datos_grafico = {'labels': labels, 'densidades': densidades, 'viscosidades': viscosidades, 'residuos': residuos}
     return render(request, 'graficobar.html', {'datos_grafico': datos_grafico})
+
+
+
 
 
 

@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from molienda import views
-from molienda.views import detalleAtomizado, nuevoRegistro, editarRegistro, eliminarRegistro, crearRegistro, detailBarbotina, \
-    editRegistro, deleteRegistro, verGranulometria, modificarRegistro, borrarRegistro, newRegistro, grafAtomizado, grafBarbotina
+from molienda.views import detalleAtomizado, nuevoRegistro, editarRegistro, eliminarRegistro, crearRegistro, \
+    detailBarbotina, \
+    editRegistro, deleteRegistro, verGranulometria, modificarRegistro, borrarRegistro, newRegistro, grafAtomizado, \
+    grafBarbotina
 from webapp.views import bienvenido, barbotina, granulometria
 
 urlpatterns = [
@@ -43,5 +45,8 @@ urlpatterns = [
     path('grafico2/', grafBarbotina, name='grafico2'),
 
 
+
 ]
+
+
 
