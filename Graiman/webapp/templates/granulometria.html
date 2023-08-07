@@ -8,16 +8,16 @@
     <table id="tabla_granulometria" class="table table-striped" style="width:100%">
         <thead>
         <tr>
-            <th>id</th>
-            <th>Fecha</th>
-            <th>Hora</th>
-            <th>% Malla 500</th>
-            <th>% Malla 425</th>
-            <th>% Malla 300</th>
-            <th>% Malla 180</th>
-            <th>% Fondo</th>
-            <th>Planta</th>
-            <th>Responsable</th>
+            <th style="width: 5%;">id</th>
+            <th style="width: 12%;">Fecha</th>
+            <th style="width: 8%;">Hora</th>
+            <th style="width: 10%;">Malla500</th>
+            <th style="width: 10%;">Malla425</th>
+            <th style="width: 10%;">Malla300</th>
+            <th style="width: 10%;">Malla180</th>
+            <th style="width: 5%;">Fondo</th>
+            <th style="width: 10%;">Planta</th>
+            <th style="width: 25%;">Responsable</th>
             <th></th>
             <th></th>
             <th></th>
@@ -26,19 +26,19 @@
         <tbody>
         {% for granu in Granu %}
         <tr>
-            <td>{{granu.id}}</td>
-            <td>{{granu.fecha}}</td>
-            <td>{{granu.hora}}</td>
-            <td>{{granu.malla500}}</td>
-            <td>{{granu.malla425}}</td>
-            <td>{{granu.malla300}}</td>
-            <td>{{granu.malla180}}</td>
-            <td>{{granu.fondo}}</td>
-            <td>{{granu.planta}}</td>
-            <td>{{granu.usuario}}</td>
-            <td style="width: 3%;"><a href="detalle_registro/{{granu.id}}"> <i class='fa-solid fa-eye'></i> </a></td>
-            <td style="width: 5%;"><a href="editar_registro/{{granu.id}}"><i class='fa-solid fa-pen' ></i></a></td>
-            <td style="width: 5%;"><a  class='btn btn-sm btn-danger'  href="eliminar_registro/{{granu.id}}"><i class='fa-solid fa-trash-can'></i></a></a></td>
+            <td style="width: 5%;">{{granu.id}}</td>
+            <td style="width: 15%;">{{granu.fecha}}</td>
+            <td style="width: 7%;">{{granu.hora}}</td>
+            <td style="width: 5%;">{{granu.malla500}}</td>
+            <td style="width: 5%;">{{granu.malla425}}</td>
+            <td style="width: 5%;">{{granu.malla300}}</td>
+            <td style="width: 5%;">{{granu.malla180}}</td>
+            <td style="width: 5%;">{{granu.fondo}}</td>
+            <td style="width: 10%;">{{granu.planta}}</td>
+            <td style="width: 25%;">{{granu.usuario}}</td>
+            <td style="width: 3%;"><a href="ver_registro/{{granu.id}}"> <i class='fa-solid fa-eye'></i> </a></td>
+            <td style="width: 5%;"><a href="modificar_registro/{{granu.id}}"><i class='fa-solid fa-pen' ></i></a></td>
+            <td style="width: 5%;"><a  class='btn btn-sm btn-danger'  href="borrar_registro/{{granu.id}}"><i class='fa-solid fa-trash-can'></i></a></a></td>
         </tr>
         {% endfor %}
         </tbody>

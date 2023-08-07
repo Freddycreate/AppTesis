@@ -1,10 +1,35 @@
-from django.contrib.auth import logout
+from django.contrib.auth import logout, authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, get_object_or_404, redirect
 from Graiman.forms import AtomizadoForm, BarbotinaForm, GranulometriaForm
 from molienda.models import Atomizado, Barbotina, Granulometria
+from django.contrib import messages
 from django.utils import timezone
 
 # Create your views here.
+def ingreso(request):
+
+    if request.method == "POST":
+        form = AuthenticationForm(request=request, data=request.POST)
+        print(form.errors)
+        if form.is_valid():
+            username = form.data.get("username")
+            raw_password = form.data.get("password")
+            user = authenticate(username=username, password=raw_password)
+            if user is not None:
+                login(request, user)
+                return redirect('inicio')
+    else:
+        form = AuthenticationForm()
+
+    informacion_template = {'form': form}
+    return render(request, 'registration/login.html', informacion_template)
+
+def logout_view(request):
+    logout(request)
+    messages.info(request, "Vuelve pronto")
+    return redirect('inicio')
+
 
 def salir(request):
     logout(request)
@@ -131,14 +156,6 @@ def borrarRegistro(request, id):
     return redirect('ini')
 
 
-
-
-
-
-
-
-
-
 def grafAtomizado(request, start_date=None, end_date=None):
     atomizado = Atomizado.objects.all()
 
@@ -152,6 +169,9 @@ def grafAtomizado(request, start_date=None, end_date=None):
     nro_silos = [dato.nroSilo for dato in atomizado]
     datos_grafico = {'labels': labels, 'humedades': humedades, 'nro_silos': nro_silos}
     return render(request, 'grafico.html', {'datos_grafico': datos_grafico})
+
+
+
 
 
 def grafBarbotina(request, start_date=None, end_date=None):
@@ -168,7 +188,6 @@ def grafBarbotina(request, start_date=None, end_date=None):
     residuos = [float(dato.residuo) for dato in barbotina]
     datos_grafico = {'labels': labels, 'densidades': densidades, 'viscosidades': viscosidades, 'residuos': residuos}
     return render(request, 'graficobar.html', {'datos_grafico': datos_grafico})
-
 
 
 

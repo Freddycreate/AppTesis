@@ -8,14 +8,14 @@
    <table id="tabla_barbotina" class="table table-striped" style="width:100%">
         <thead>
         <tr>
-            <th>id</th>
-            <th>Fecha</th>
-            <th>Hora</th>
-            <th>Densidad(g/cm3)</th>
-            <th>Viscosidad(seg)</th>
-            <th>Residuo(g)</th>
-            <th>Planta</th>
-            <th>Responsable</th>
+            <th style="width: 10%;">id</th>
+            <th style="width: 15%;">Fecha</th>
+            <th style="width: 10%;">Hora</th>
+            <th style="width: 10%;">Densidad(g/cm3)</th>
+            <th style="width: 10%;">Viscosidad(seg)</th>
+            <th style="width: 10%;">Residuo(g)</th>
+            <th style="width: 15%;">Planta</th>
+            <th style="width: 30%;">Responsable</th>
             <th></th>
             <th></th>
             <th></th>
@@ -24,16 +24,16 @@
         <tbody>
         {% for bar in Bar %}
         <tr>
-            <td>{{bar.id}}</td>
-            <td>{{bar.fecha}}</td>
-            <td>{{bar.hora}}</td>
-            <td>{{bar.densidad}}</td>
-            <td>{{bar.viscosidad}}</td>
-            <td>{{bar.residuo}}</td>
-            <td>{{bar.planta}}</td>
-            <td>{{bar.usuario}}</td>
-            <td style="width: 3%;"><a href="detalle_registro/{{bar.id}}"> <i class='fa-solid fa-eye'></i> </a></td>
-            <td style="width: 5%;"><a href="editar_registro/{{bar.id}}"><i class='fa-solid fa-pen' ></i></a></td>
+            <td style="width: 5%;">{{bar.id}}</td>
+            <td style="width: 15%;">{{bar.fecha}}</td>
+            <td style="width: 10%;">{{bar.hora}}</td>
+            <td style="width: 7%;">{{bar.densidad}}</td>
+            <td style="width: 8%;">{{bar.viscosidad}}</td>
+            <td style="width: 7%;">{{bar.residuo}}</td>
+            <td style="width: 10%;">{{bar.planta}}</td>
+            <td style="width: 25%;">{{bar.usuario}}</td>
+            <td style="width: 3%;"><a href="detail_registro/{{bar.id}}"> <i class='fa-solid fa-eye'></i> </a></td>
+            <td style="width: 5%;"><a href="edit_registro/{{bar.id}}"><i class='fa-solid fa-pen' ></i></a></td>
             <td style="width: 5%;"><a  class='btn btn-sm btn-danger'  href="delete_registro/{{bar.id}}"><i class='fa-solid fa-trash-can'></i></a></a></td>
         </tr>
         {% endfor %}

@@ -40,28 +40,28 @@
             <li class="nav-item">
                 <a class="nav-link" href=" {% url 'inicio' %} ">Atomizado</a>
             </li>
-            </li>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href=" {% url 'index' %} ">Barbotina</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href=" {% url 'ini' %} ">Granulometría</a>
             </li>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href=" {% url 'grafico1' %} ">Gráfico AT</a>
-            </li>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href=" {% url 'grafico2' %} ">Gráfico Barbotina</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href=" {% url 'salir' %} ">Cerrar Sesión</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Bienvenido: {{user.username}}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                 <li><a class="dropdown-item" href="{% url 'logout_view' %}">salir</a></li>
+                 <li><a class="dropdown-item" href="{% url 'login' %}">Usar otra cuenta</a></li>
+                </ul>
             </li>
-
         </ul>
-
     </div>
 </nav>
 <div class="content container">

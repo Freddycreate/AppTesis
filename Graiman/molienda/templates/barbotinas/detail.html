@@ -2,9 +2,10 @@
 {% block content %}
     <title>Detalle de Barbotinas</title>
 <body>
-  <h1>Detalle de Barbotinas</h1>
-  <div>Densidad (g/cm3): {{bar.Densidad}}</div>
-  <div>Viscosidad (seg): {{bar.Viscosidad}}</div>
-  <div>Residuo (g): {{bar.Residuo}}</div>
+  <h5>Detalle de Barbotinas</h5>
+  <div>Densidad (g/cm3): {{bar.densidad}}</div>
+  <div>Viscosidad (seg): {{bar.viscosidad}}</div>
+  <div>Residuo (g): {{bar.residuo}}</div>
+  <a href="{% url 'index' %}"><button type="button">Regresar</button></a>
 </body>
 {% endblock %}

@@ -1,14 +1,32 @@
-{% extends 'base.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}" />
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
 {% block content %}
-    <title>Nuevo Registro</title>
+   <title>Nuevo Registro</title>
+ <script>
+     $(document).ready(function() {
+        $('#id_fecha').datepicker({
+            dateFormat: 'yy-mm-dd',
+        });
+     });
+ </script>
+
 <body>
 <form method="POST">
-  <h5>Agregar Nuevo Registro </h5>
+  <h5>Agregar Registro</h5>
   <table>
-      {{formaSilo}}
+      {{ formaSilo }}
   </table>
     <button type="submit">Enviar</button>
-    {%csrf_token%}
+    <a href="{% url 'inicio' %}"><button type="button">Cancelar</button></a>
+
+    {% csrf_token %}
 </form>
+
 </body>
+
 {% endblock %}
