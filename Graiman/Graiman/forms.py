@@ -17,6 +17,14 @@ class AtomizadoForm(ModelForm):
             'Planta': TextInput(attrs={'type': 'number'}),
             'NroSilo': TextInput(attrs={'type': 'number'}),
         }
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        registros_barbotina = Barbotina.objects.order_by('-fecha')[:5]
+        registros_granulometria = Granulometria.objects.order_by('-fecha')[:5]
+
+        self.fields['barbotina'].queryset = registros_barbotina
+        self.fields['granulometria'].queryset = registros_granulometria
+
 
 class BarbotinaForm(ModelForm):
     class Meta:
