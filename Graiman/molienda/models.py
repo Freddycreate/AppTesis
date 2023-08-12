@@ -6,7 +6,7 @@ class Planta(models.Model):
     nroPlanta = models.CharField(max_length=50)
 
     def __str__(self):
-        return f'{self.nroPlanta}'
+        return f'Planta  {self.nroPlanta}'
 
 
 class Barbotina(models.Model):
@@ -20,7 +20,7 @@ class Barbotina(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.fecha} {self.hora}'
+        return f'{self.fecha} {self.hora} {self.planta}'
 
 
 class Granulometria(models.Model):
@@ -35,7 +35,7 @@ class Granulometria(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.fecha} {self.hora}'
+        return f'{self.fecha} {self.hora} {self.planta}'
 
 
 class Atomizado(models.Model):

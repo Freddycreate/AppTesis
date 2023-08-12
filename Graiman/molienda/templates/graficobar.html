@@ -14,6 +14,15 @@
                 <label for="end_date" class="form-label">Fecha de fin:</label>
                 <input type="date" id="end_date" class="form-control">
             </div>
+             <div class="col-md-3">
+                <label for="numero_planta" class="form-label">Número de Planta:</label>
+                <select id="numero_planta" class="form-control">
+                    <option value="">Todas</option>
+                    <option value="1">Planta 1</option>
+                    <option value="2">Planta 2</option>
+                    <option value="3">Planta 3</option>
+                </select>
+            </div>
             <div class="col-md-2">
                 <button onclick="filterData()" class="btn btn-primary mt-4">Filtrar</button>
             </div>
@@ -31,13 +40,17 @@
             function filterData() {
                 var start_date = document.getElementById('start_date').value;
                 var end_date = document.getElementById('end_date').value;
+                var planta = document.getElementById('planta')
 
                 var filteredLabels = [];
                 var filteredViscosidades = [];
                 var filteredResiduos = [];
 
                 for (var i = 0; i < initialLabels.length; i++) {
-                    if (start_date <= initialLabels[i] && initialLabels[i] <= end_date) {
+                    if (
+                        (start_date <= initialLabels[i] && initialLabels[i] <= end_date) &&
+                        (!planta || planta === 'Todas' || planta === initialPlantas[i])
+                    ){
                         filteredLabels.push(initialLabels[i]);
                         filteredViscosidades.push(initialViscosidades[i]);
                         filteredResiduos.push(initialResiduos[i]);
