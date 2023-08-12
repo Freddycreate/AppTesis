@@ -37,20 +37,18 @@ def salir(request):
 
 
 def detalleAtomizado(request, id):
-    #    silos = Atomizado.objects.get(pk=id)
-    # tambien se lo podria codificar para que salga como pag no encontrada 404
     silos = get_object_or_404(Atomizado, pk=id)
     return render(request, 'silos/detalle.html', {'silos': silos})
 
-
-# AtomizadoForm = modelform_factory(Atomizado, exclude=[])
 
 
 def nuevoRegistro(request):
     if request.method == 'POST':
         formaSilo = AtomizadoForm(request.POST)
         if formaSilo.is_valid():
-            formaSilo.save()
+            registro = formaSilo.save(commit=False)
+            registro.usuario = request.default_user
+            registro.save()
             return redirect('inicio')
     else:
         formaSilo = AtomizadoForm()
@@ -89,8 +87,10 @@ def crearRegistro(request):
     if request.method == 'POST':
         formaBar = BarbotinaForm(request.POST)
         if formaBar.is_valid():
-            formaBar.save()
-            return redirect('barbotina.html')
+            registro = formaBar.save(commit=False)
+            registro.usuario = request.default_user
+            registro.save()
+            return redirect('index')
 
     else:
         formaBar = BarbotinaForm()
@@ -129,7 +129,9 @@ def newRegistro(request):
     if request.method == 'POST':
         formaGranu = GranulometriaForm(request.POST)
         if formaGranu.is_valid():
-            formaGranu.save()
+            registro = formaGranu.save(commit=False)
+            registro.usuario = request.default_user
+            registro.save()
             return redirect('ini')
 
     else:
@@ -188,9 +190,5 @@ def grafBarbotina(request, start_date=None, end_date=None):
     residuos = [float(dato.residuo) for dato in barbotina]
     datos_grafico = {'labels': labels, 'densidades': densidades, 'viscosidades': viscosidades, 'residuos': residuos}
     return render(request, 'graficobar.html', {'datos_grafico': datos_grafico})
-
-
-
-
 
 
