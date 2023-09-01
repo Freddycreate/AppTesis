@@ -1,11 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
     <title>Detalle de Barbotinas</title>
-<body>
-  <h5>Detalle de Barbotinas</h5>
-  <div>Densidad (g/cm3): {{bar.densidad}}</div>
-  <div>Viscosidad (seg): {{bar.viscosidad}}</div>
-  <div>Residuo (g): {{bar.residuo}}</div>
-  <a href="{% url 'index' %}"><button type="button">Regresar</button></a>
-</body>
+    <div class="container mt-4">
+        <h5 class="mb-4">Detalle de la Barbotina</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <strong>Fecha:</strong> {{bar.fecha}}
+                </div>
+                <div class="mb-3">
+                    <strong>Hora:</strong> {{bar.hora}}
+                </div>
+                <div class="mb-3">
+                    <strong>Densidad:</strong> {{bar.densidad}}
+                </div>
+                <div class="mb-3">
+                    <strong>Viscosidad:</strong> {{bar.viscosidad}}
+                </div>
+                <div class="mb-3">
+                    <strong>Residuo:</strong> {{bar.residuo}}
+                </div>
+                <div class="mb-3">
+                    <strong>Planta:</strong> {{bar.planta}}
+                </div>
+                <div class="mb-3">
+                    <strong>Responsable:</strong> {{bar.usuario}}
+                </div>
+
+            </div>
+        </div>
+        <a href="{% url 'index' %}" class="btn btn-primary">Regresar</a>
+    </div>
 {% endblock %}
+

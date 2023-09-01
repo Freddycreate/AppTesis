@@ -40,8 +40,6 @@ INSTALLED_APPS = [
     'import_export',
 
 
-
-
 ]
 
 MIDDLEWARE = [
@@ -52,6 +50,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+#    'molienda.middleware.DefaultUserMiddleware',
 ]
 
 ROOT_URLCONF = 'Graiman.urls'

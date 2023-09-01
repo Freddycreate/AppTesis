@@ -5,7 +5,8 @@
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 
     <div class="container mt-5">
-        <h6 class="mb-3"><b>Seleccione el rango de fecha</b></h6>
+        <h4 class="mb-3"><em>En este gráfico me muestra el comportamiento de Humedad del polvo atomizado</em></h4>
+        <h5 class="mb-3"><em>Seleccione el rango de fecha</em></h5>
         <div class="row mb-3">
             <div class="col-md-3">
                 <label for="start_date" class="form-label">Fecha de inicio:</label>
@@ -16,14 +17,27 @@
                 <input type="date" id="end_date" class="form-control">
             </div>
             <div class="col-md-3">
-                <label for="numero_planta" class="form-label">Número de Planta:</label>
-                <select id="numero_planta" class="form-control">
+                <label for="planta" class="form-label">Número de Planta:</label>
+                <select id="planta" class="form-control">
                     <option value="">Todas</option>
                     <option value="1">Planta 1</option>
                     <option value="2">Planta 2</option>
                     <option value="3">Planta 3</option>
                 </select>
             </div>
+            <div class="col-md-3">
+                <label for="usuario" class="form-label">Usuario:</label>
+                <select id="usuario" class="form-control">
+                    <option value="">Todos</option>
+                    <option value="9">Rene</option>
+                    <option value="5">Patricio</option>
+                    <option value="4">Edwin</option>
+                    <option value="3">Geovanny</option>
+                    <option value="6">Marcos</option>
+                    <option value="2">Pablo</option>
+                </select>
+            </div>
+
             <div class="col-md-2">
                 <button onclick="filterData()" class="btn btn-primary mt-4">Filtrar</button>
             </div>
@@ -37,62 +51,65 @@
             var initialHumedades = datos_grafico.humedades;
 
             function filterData() {
-            var start_date = document.getElementById('start_date').value;
-            var end_date = document.getElementById('end_date').value;
-            var planta = document.getElementById('planta')
+                var start_date = document.getElementById('start_date').value;
+                var end_date = document.getElementById('end_date').value;
+                var planta = document.getElementById('planta');
+                var usuario = document.getElementById('usuario').value
 
-            var filteredLabels = [];
-            var filteredHumedades = [];
+                var filteredLabels = [];
+                var filteredHumedades = [];
 
-            for (var i = 0; i < initialLabels.length; i++) {
-                if (
-                    (start_date <= initialLabels[i] && initialLabels[i] <= end_date) &&
-                    (!planta || planta === 'Todas' || planta === initialPlantas[i])
-                ) {
-                    filteredLabels.push(initialLabels[i]);
-                    filteredHumedades.push(initialHumedades[i]);
-                }
-            }
-                var options = {
-                    series: [{
-                        name: "Humedades",
-                        data: filteredHumedades
-                    }],
-                    chart: {
-                        height: 350,
-                        type: 'line',
-                        zoom: {
-                            enabled: false
-                        }
-                    },
-                    dataLabels: {
-                        enabled: false
-                    },
-                    stroke: {
-                        curve: 'straight'
-                    },
-                    title: {
-                        text: 'Control de Humedades Silos Atomizados',
-                        align: 'center'
-                    },
-                    grid: {
-                        row: {
-                            colors: ['#f3f3f3', 'transparent'],
-                            opacity: 0.5
-                        },
-                    },
-                    xaxis: {
-                        categories: filteredLabels
+                for (var i = 0; i < initialLabels.length; i++) {
+                    if (
+                        (start_date <= initialLabels[i] && initialLabels[i] <= end_date) &&
+                        //(!planta || planta === 'Todas' || planta === initialPlanta[i]) &&
+                        (!usuario || usuario === 'Todos' || usuario === initialUsuario[i])
+                    ) {
+                        filteredLabels.push(initialLabels[i]);
+                        filteredHumedades.push(initialHumedades[i]);
                     }
-                };
+                }
+                    var options = {
+                        series: [{
+                            name: "Humedades",
+                            data: filteredHumedades
+                        }],
+                        chart: {
+                            height: 350,
+                            type: 'line',
+                            zoom: {
+                                enabled: false
+                            }
+                        },
+                        dataLabels: {
+                            enabled: false
+                        },
+                        stroke: {
+                            curve: 'straight'
+                        },
+                        title: {
+                            text: 'Control de Humedades Silos Atomizados',
+                            align: 'center'
+                        },
+                        grid: {
+                            row: {
+                                colors: ['#f3f3f3', 'transparent'],
+                                opacity: 0.5
+                            },
+                        },
+                        xaxis: {
+                            categories: filteredLabels
+                        }
+                    };
 
-                var chart = new ApexCharts(document.querySelector("#chart"), options);
-                chart.render();
-            }
+                    var chart = new ApexCharts(document.querySelector("#chart"), options);
+                    chart.render();
+                }
 
-            // Render the initial chart on page load
-            filterData();
+                // Render the initial chart on page load
+                filterData();
 
-        </script>
-    </body>
-{% endblock %}
+            </script>
+        </body>
+    {% endblock %}
+

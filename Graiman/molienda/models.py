@@ -9,6 +9,11 @@ class Planta(models.Model):
         return f'Planta  {self.nroPlanta}'
 
 
+class Usuario(models.Model):
+    nombre = models.CharField(max_length=100)
+    apellido = models.CharField(max_length=100)
+
+
 class Barbotina(models.Model):
     fecha = models.DateField()
     hora = models.TimeField()
@@ -20,7 +25,7 @@ class Barbotina(models.Model):
     usuario = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.fecha} {self.hora} {self.planta}'
+        return f' {self.fecha} {self.hora} {self.planta}'
 
 
 class Granulometria(models.Model):

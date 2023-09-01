@@ -2,18 +2,44 @@
 {% block content %}
     <title>Detalle de Silos Atomizados</title>
 
-<body>
-  <h5>Detalle del polvo Atomizado</h5>
-  <div>fecha: {{silos.fecha}}</div>
-  <div>hora: {{silos.hora}}</div>
-  <div>codigo: {{silos.codigo}}</div>
-  <div>planta: {{silos.planta}}</div>
-  <div>nroSilo: {{silos.nroSilo}}</div>
-  <div>humedad: {{silos.humedad}}</div>
-  <div>usuario: {{silos.usuario}}</div>
-  <div>granulometria: {{silos.granulometria}}</div>
-  <div>barbotina: {{silos.barbotina}}</div>
-  <div>observaciones: {{silos.observaciones}}</div>
-  <a href="{% url 'inicio' %}"><button type="button">Regresar</button></a>
-</body>
+    <div class="container mt-4">
+        <h5 class="mb-4">Detalle del polvo Atomizado</h5>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <strong>Fecha:</strong> {{silos.fecha}}
+                </div>
+                <div class="mb-3">
+                    <strong>Hora:</strong> {{silos.hora}}
+                </div>
+                <div class="mb-3">
+                    <strong>Código:</strong> {{silos.codigo}}
+                </div>
+                <div class="mb-3">
+                    <strong>Planta:</strong> {{silos.planta}}
+                </div>
+                <div class="mb-3">
+                    <strong>Número de Silo:</strong> {{silos.nroSilo}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <strong>Humedad:</strong> {{silos.humedad}}
+                </div>
+                <div class="mb-3">
+                    <strong>Responsable:</strong> {{silos.usuario}}
+                </div>
+                <div class="mb-3">
+                    <strong>Granulometría:</strong> {{silos.granulometria}}
+                </div>
+                <div class="mb-3">
+                    <strong>Barbotina:</strong> {{silos.barbotina}}
+                </div>
+                <div class="mb-3">
+                    <strong>Observaciones:</strong> {{silos.observaciones}}
+                </div>
+            </div>
+        </div>
+        <a href="{% url 'inicio' %}" class="btn btn-primary">Regresar</a>
+    </div>
 {% endblock %}

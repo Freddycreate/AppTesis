@@ -1,43 +1,59 @@
 {% extends 'base.html' %}
 {% block content %}
-     <h5>CONTROL POLVO ATOMIZADO</h5>
+     <h1>CONTROL POLVO ATOMIZADO</h1>
 <div>
-    <a class="btn btn-secondary btn-sm" style="width: 60px;" href="nuevo_registro"><i class="fa fa-plus" aria-hidden="true"></i></a>
+    <a class="btn btn-secondary btn-sm" style="width: 70px;" href="nuevo_registro" role="button">
+      <em class="fa fa-plus" aria-hidden="true" alt="Icono de Agregar"></em>
+        Nuevo
+    </a>
 </div>
 <br>
 <div>
     <table id="tabla_atomizado" class="table table-striped" style="width:100%">
         <thead>
         <tr>
-            <th style="width: 5%;">id</th>
-            <th style="width: 15%;">Fecha</th>
-            <th style="width: 5%;">Hora</th>
-            <th style="width: 10%;">Codigo</th>
-            <th style="width: 5%;">Planta</th>
-            <th style="width: 5%;">Silo</th>
-            <th style="width: 5%;">Humedad</th>
-            <th style="width: 20%;">Responsable</th>
-            <th style="width: 25%;">Observaciones</th>
-            <th ></th>
-            <th></th>
-            <th></th>
+            <th style="width: 5%;" scope="col">ID</th>
+            <th style="width: 25%;" scope="col">Fecha</th>
+            <th style="width: 5%;" scope="col">Hora</th>
+            <th style="width: 10%;" scope="col">Código</th>
+            <th style="width: 5%;" scope="col">Planta</th>
+            <th style="width: 5%;" scope="col">Silo</th>
+            <th style="width: 5%;" scope="col">Humedad</th>
+            <th style="width: 20%;" scope="col">Responsable</th>
+            <th style="width: 25%;" scope="col">Observaciones</th>
+            <th scope="col">OPT</th>
+            <th scope="col">OPT</th>
+            <th scope="col">OPT</th>
         </tr>
         </thead>
         <tbody>
         {% for silos in Silos %}
         <tr>
             <td style="width: 5%;">{{silos.id}}</td>
-            <td style="width: 15%;">{{silos.fecha}}</td>
+            <td style="width: 25%;">{{silos.fecha}}</td>
             <td style="width: 5%;">{{silos.hora}}</td>
             <td style="width: 8%;">{{silos.codigo}}</td>
             <td style="width: 7%;">{{silos.planta}}</td>
             <td style="width: 5%;"> {{silos.nroSilo}}</td>
             <td style="width: 5%;"> {{silos.humedad}}</td>
-            <td style="width: 30%;"> {{silos.usuario}}</td>
+            <td style="width: 10%;"> {{silos.usuario}}</td>
             <td style="width: 25%;">{{silos.observaciones}}</td>
-            <td style="width: 3%;"><a href="detalle_registro/{{silos.id}}"> <i class='fa-solid fa-eye'></i> </a></td>
-            <td style="width: 5%;"><a href="editar_registro/{{silos.id}}"><i class='fa-solid fa-pen' ></i></a></td>
-            <td style="width: 5%;"><a  class='btn btn-sm btn-danger'  href="eliminar_registro/{{silos.id}}"><i class='fa-solid fa-trash-can'></i></a></a></td>
+            <td>
+                <a href="detalle_registro/{{silos.id}}" aria-label="Ver Detalles del Registro">
+                    <em class="fa fa-eye" aria-hidden="true"></em>
+                </a>
+            </td>
+            <td>
+                <a href="editar_registro/{{silos.id}}" aria-label="Editar Registro">
+                    <em class="fa fa-pencil" aria-hidden="true"></em>
+                </a>
+            </td>
+            <td>
+                <a class="btn btn-sm btn-danger" href="eliminar_registro/{{silos.id}}" aria-label="Eliminar Registro">
+                    <em class="fa fa-trash" aria-hidden="true"></em>
+                </a>
+            </td>
+
         </tr>
         {% endfor %}
         </tbody>
@@ -58,19 +74,19 @@
        buttons: [
           {
             extend: 'excelHtml5',
-            text: '<i class="fas fa-file-excel"></i> ',
+            text: '<em class="fas fa-file-excel"></em>',
             titleAttr: 'Exportar a Excel',
             className: 'btn btn-success',
           },
           {
             extend: 'pdfHtml5',
-            text: '<i class="fas fa-file-pdf"></i> ',
+            text: '<em class="fas fa-file-pdf"></em> ',
             titleAttr: 'Exportar a PDF',
             className: 'btn btn-danger',
           },
           {
             extend: 'print',
-            text: '<i class="fa fa-print"></i> ',
+            text: '<em class="fa fa-print"></em> ',
             titleAttr: 'Imprimir',
             className: 'btn btn-info',
           },

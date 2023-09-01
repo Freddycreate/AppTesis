@@ -1,9 +1,12 @@
-from django.forms import ModelForm, TextInput
+from django.forms import ModelForm, TextInput, Select
 from django import forms
 from molienda.models import Atomizado, Barbotina, Granulometria
 
+
 class DateInput(forms.DateField):
     input_type = 'date'
+
+
 class FechaForm(forms.Form):
     date_field = forms.DateField(widget=DateInput)
 
@@ -11,19 +14,19 @@ class FechaForm(forms.Form):
 class AtomizadoForm(ModelForm):
     class Meta:
         model = Atomizado
-        fields = ['fecha', 'hora', 'codigo', 'nroSilo', 'humedad', 'observaciones', 'planta', 'barbotina', 'granulometria']
+        fields = ['fecha', 'hora', 'codigo', 'nroSilo', 'humedad', 'observaciones', 'planta', 'barbotina',
+                  'granulometria']
         widgets = {
-            'Fecha': TextInput(attrs={'date_field': DateInput}),
-            'Planta': TextInput(attrs={'type': 'number'}),
-            'NroSilo': TextInput(attrs={'type': 'number'}),
-        }
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        registros_barbotina = Barbotina.objects.order_by('-fecha')[:5]
-        registros_granulometria = Granulometria.objects.order_by('-fecha')[:5]
 
-        self.fields['barbotina'].queryset = registros_barbotina
-        self.fields['granulometria'].queryset = registros_granulometria
+            'nroSilo': forms.TextInput(attrs={'type': 'number'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(AtomizadoForm, self).__init__(*args, **kwargs)
+        self.fields['barbotina'] = forms.ModelChoiceField(queryset=Barbotina.objects.order_by('-fecha')[:10])
+        self.fields['granulometria'] = forms.ModelChoiceField(queryset=Granulometria.objects.order_by('-fecha')[:10])
+#        self.fields['barbotina'].queryset = Barbotina.objects.order_by('-fecha')[:15]
+#        self.fields['granulometria'].queryset = Granulometria.objects.order_by('-fecha')[:15]
 
 
 class BarbotinaForm(ModelForm):
@@ -31,11 +34,10 @@ class BarbotinaForm(ModelForm):
         model = Barbotina
         fields = ['fecha', 'hora', 'densidad', 'viscosidad', 'residuo', 'planta']
         widgets = {
-            'Densidad': TextInput(attrs={'type': 'decimal'}),
-            'Viscosidad':TextInput(attrs={'type': 'number'}),
-            'Residuo': TextInput(attrs={'type': 'decimal'}),
-            'Fecha': TextInput(attrs={'date_field': DateInput}),
-            'usuario': TextInput(attrs={'type': 'varChar'})
+            'densidad': TextInput(attrs={'type': 'decimal'}),
+            'viscosidad':TextInput(attrs={'type': 'number'}),
+            'residuo': TextInput(attrs={'type': 'decimal'}),
+
         }
 
 
@@ -44,10 +46,10 @@ class GranulometriaForm(ModelForm):
         model = Granulometria
         fields = ['fecha', 'hora', 'malla500', 'malla425', 'malla300', 'malla180', 'fondo', 'planta']
         widgets = {
-            'Malla500': TextInput(attrs={'type': 'decimal'}),
-            'Malla425': TextInput(attrs={'type': 'decimal'}),
-            'Malla300': TextInput(attrs={'type': 'decimal'}),
-            'Malla180': TextInput(attrs={'type': 'decimal'}),
-            'Fondo': TextInput(attrs={'type': 'decimal'}),
-            'Fecha': TextInput(attrs={'date_field': DateInput}),
+            'malla500': TextInput(attrs={'type': 'decimal'}),
+            'malla425': TextInput(attrs={'type': 'decimal'}),
+            'malla300': TextInput(attrs={'type': 'decimal'}),
+            'malla180': TextInput(attrs={'type': 'decimal'}),
+            'fondo': TextInput(attrs={'type': 'decimal'}),
+
         }

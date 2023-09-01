@@ -37,37 +37,39 @@ def salir(request):
 
 
 def detalleAtomizado(request, id):
-    #    silos = Atomizado.objects.get(pk=id)
-    # tambien se lo podria codificar para que salga como pag no encontrada 404
     silos = get_object_or_404(Atomizado, pk=id)
     return render(request, 'silos/detalle.html', {'silos': silos})
-
-
-# AtomizadoForm = modelform_factory(Atomizado, exclude=[])
 
 
 def nuevoRegistro(request):
     if request.method == 'POST':
         formaSilo = AtomizadoForm(request.POST)
+        print(request.POST)
+        print(formaSilo.errors)
         if formaSilo.is_valid():
-            formaSilo.save()
+            registro = formaSilo.save(commit=False)
+            registro.usuario = request.user
+            registro.save()
             return redirect('inicio')
     else:
         formaSilo = AtomizadoForm()
-        return render(request, 'silos/nuevo.html', {'formaSilo': formaSilo})
+    return render(request, 'silos/nuevo.html', {'formaSilo': formaSilo})
 
 
 def editarRegistro(request, id):
+    silos = get_object_or_404(Atomizado, pk=id)
     if request.method == 'POST':
         formaSilo = AtomizadoForm(request.POST)
         if formaSilo.is_valid():
-            formaSilo.save()
+            silos.delete()
+            registro = formaSilo.save(commit=False)
+            registro.usuario = request.user
+            registro.save()
             return redirect('inicio')
-
     else:
-        silos = get_object_or_404(Atomizado, pk=id)
         formaSilo = AtomizadoForm(instance=silos)
-        return render(request, 'silos/editar.html', {'formaSilo': formaSilo})
+
+    return render(request, 'silos/editar.html', {'formaSilo': formaSilo})
 
 
 def eliminarRegistro(request, id):
@@ -89,25 +91,29 @@ def crearRegistro(request):
     if request.method == 'POST':
         formaBar = BarbotinaForm(request.POST)
         if formaBar.is_valid():
-            formaBar.save()
-            return redirect('barbotina.html')
-
+            registro = formaBar.save(commit=False)
+            registro.usuario = request.user
+            registro.save()
+            return redirect('index')
     else:
         formaBar = BarbotinaForm()
         return render(request, 'barbotinas/crear.html', {'formaBar': formaBar})
 
 
 def editRegistro(request, id):
+    bar = get_object_or_404(Barbotina, pk=id)
     if request.method == 'POST':
         formaBar = BarbotinaForm(request.POST)
         if formaBar.is_valid():
-            formaBar.save()
+            bar.delete()
+            registro = formaBar.save(commit=False)
+            registro.usuario = request.user
+            registro.save()
             return redirect('index')
-
     else:
-        bar = get_object_or_404(Barbotina, pk=id)
         formaBar = BarbotinaForm(instance=bar)
-        return render(request, 'barbotinas/edit.html', {'formaBar': formaBar})
+
+    return render(request, 'barbotinas/edit.html', {'formaBar': formaBar})
 
 
 def deleteRegistro(request, id):
@@ -129,7 +135,9 @@ def newRegistro(request):
     if request.method == 'POST':
         formaGranu = GranulometriaForm(request.POST)
         if formaGranu.is_valid():
-            formaGranu.save()
+            registro = formaGranu.save(commit=False)
+            registro.usuario = request.user
+            registro.save()
             return redirect('ini')
 
     else:
@@ -138,16 +146,18 @@ def newRegistro(request):
 
 
 def modificarRegistro(request, id):
+    granu = get_object_or_404(Granulometria, pk=id)
     if request.method == 'POST':
         formaGranu = GranulometriaForm(request.POST)
         if formaGranu.is_valid():
-            formaGranu.save()
+            granu.delete()
+            registro = formaGranu.save(commit=False)
+            registro.usuario = request.user
+            registro.save()
             return redirect('ini')
-
     else:
-        granu = get_object_or_404(Granulometria, pk=id)
         formaGranu = GranulometriaForm(instance=granu)
-        return render(request, 'granulometrias/modificar.html', {'formaGranu': formaGranu})
+    return render(request, 'granulometrias/modificar.html', {'formaGranu': formaGranu})
 
 
 def borrarRegistro(request, id):
@@ -156,7 +166,7 @@ def borrarRegistro(request, id):
     return redirect('ini')
 
 
-def grafAtomizado(request, start_date=None, end_date=None, planta=None):
+def grafAtomizado(request, start_date=None, end_date=None, planta=None, usuario=None):
     atomizado = Atomizado.objects.all()
 
     if start_date:
@@ -164,7 +174,9 @@ def grafAtomizado(request, start_date=None, end_date=None, planta=None):
     if end_date:
         atomizado = atomizado.filter(fecha__lte=end_date)
     if planta:
-        atomizado = atomizado.filter(planta=planta)
+        atomizado = atomizado.filter(planta__nombre=planta)
+    if usuario:
+        atomizado = atomizado.filter(usuario__username=usuario)
 
     labels = [dato.fecha.strftime('%Y-%m-%d') for dato in atomizado]
     humedades = [dato.humedad for dato in atomizado]
@@ -173,15 +185,17 @@ def grafAtomizado(request, start_date=None, end_date=None, planta=None):
     return render(request, 'grafico.html', {'datos_grafico': datos_grafico})
 
 
-def grafBarbotina(request, start_date=None, end_date=None, planta=None):
+
+
+
+
+def grafBarbotina(request, start_date=None, end_date=None):
     barbotina = Barbotina.objects.all()
 
     if start_date:
         barbotina = barbotina.filter(fecha__gte=start_date)
     if end_date:
         barbotina = barbotina.filter(fecha__lte=end_date)
-    if planta:
-        barbotina = barbotina.filter(planta=planta)
 
     labels = [dato.fecha.strftime('%Y-%m-%d') for dato in barbotina]
     densidades = [float(dato.densidad) for dato in barbotina]
@@ -189,7 +203,6 @@ def grafBarbotina(request, start_date=None, end_date=None, planta=None):
     residuos = [float(dato.residuo) for dato in barbotina]
     datos_grafico = {'labels': labels, 'densidades': densidades, 'viscosidades': viscosidades, 'residuos': residuos}
     return render(request, 'graficobar.html', {'datos_grafico': datos_grafico})
-
 
 
 

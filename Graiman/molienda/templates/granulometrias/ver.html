@@ -1,13 +1,43 @@
 {% extends 'base.html' %}
 {% block content %}
     <title>Detalle de Granulometrías</title>
-<body>
-  <h5>Granulometrías Realizadas</h5>
-  <div>% Malla 500: {{granu.malla500}}</div>
-  <div>% Malla425: {{granu.malla425}}</div>
-  <div>% Malla 300: {{granu.malla300}}</div>
-  <div>% Malla 180: {{granu.malla180}}</div>
-  <div>% Fondo: {{granu.fondo}}</div>
-  <a href="{% url 'ini' %}"><button type="button">Regresar</button></a>
-</body>
+    <div class="container mt-4">
+      <h5 class="mb-4">Detalle de Gramulometría </h5>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <strong>Fecha:</strong> {{granu.fecha}}
+                </div>
+                <div class="mb-3">
+                    <strong>Hora:</strong> {{granu.hora}}
+                </div>
+                <div class="mb-3">
+                    <strong>% Malla 500:</strong> {{granu.malla500}}
+                </div>
+                <div class="mb-3">
+                    <strong>% Malla 425:</strong> {{granu.malla425}}
+                </div>
+                <div class="mb-3">
+                    <strong>% Malla 300:</strong> {{granu.malla300}}
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <strong>% Malla 180:</strong> {{granu.malla180}}
+                </div>
+                <div class="mb-3">
+                    <strong>% Fondo:</strong> {{granu.fondo}}
+                </div>
+                <div class="mb-3">
+                    <strong>Planta:</strong> {{granu.planta}}
+                </div>
+                <div class="mb-3">
+                    <strong>Responsable:</strong> {{granu.usuario}}
+                </div>
+            </div>
+        </div>
+        <a href="{% url 'ini' %}" class="btn btn-primary">Regresar</a>
+    </div>
+
 {% endblock %}
+}
