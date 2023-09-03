@@ -5,55 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="820910c5-dbfb-4584-b8f4-daf999dc59a1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Graiman/webapp/static/css/forms.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/AppTesis.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AppTesis.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/Graiman/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/Graiman/asgi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Graiman/Graiman/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/Graiman/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/Graiman/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/Graiman/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/Graiman/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/Graiman/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/Graiman/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/Graiman/wsgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/migrations/0001_initial.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/migrations/0001_initial.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/migrations/0002_alter_atomizado_barbotina_and_more.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/migrations/0002_alter_atomizado_barbotina_and_more.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/migrations/0003_rename_barbotina_atomizado_barbotina_and_more.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/migrations/0003_rename_barbotina_atomizado_barbotina_and_more.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/migrations/0004_usuario.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/migrations/0004_usuario.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/migrations/0005_atomizado_usuario_barbotina_usuario_and_more.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/migrations/0005_atomizado_usuario_barbotina_usuario_and_more.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/templates/barbotinas/crear.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/templates/barbotinas/crear.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/templates/barbotinas/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/templates/barbotinas/detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/templates/barbotinas/edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/templates/barbotinas/edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Graiman/molienda/templates/grafico.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/templates/grafico.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Graiman/molienda/templates/graficobar.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/templates/graficobar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/templates/granulometrias/modificar.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/templates/granulometrias/modificar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/templates/granulometrias/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/templates/granulometrias/new.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/templates/granulometrias/ver.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/templates/granulometrias/ver.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/templates/silos/detalle.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/templates/silos/detalle.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/templates/silos/editar.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/templates/silos/editar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Graiman/molienda/templates/silos/nuevo.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/templates/silos/nuevo.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/molienda/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Graiman/molienda/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/molienda/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/webapp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/webapp/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/webapp/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/webapp/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/webapp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/webapp/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/webapp/static/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/webapp/static/css/index.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/webapp/static/js/barbotina.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/webapp/static/js/granulometria.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/webapp/static/js/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/webapp/templates/barbotina.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/webapp/templates/barbotina.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Graiman/webapp/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/webapp/templates/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/webapp/templates/bienvenido.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/webapp/templates/bienvenido.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/webapp/templates/granulometria.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/webapp/templates/granulometria.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/webapp/templates/registration/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/webapp/templates/registration/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/webapp/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/webapp/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/webapp/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/webapp/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Graiman/webapp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graiman/webapp/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +20,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Graiman" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />

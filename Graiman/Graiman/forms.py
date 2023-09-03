@@ -1,7 +1,7 @@
 from django.forms import ModelForm, TextInput, Select
 from django import forms
 from molienda.models import Atomizado, Barbotina, Granulometria
-
+from django.contrib.auth.models import User
 
 class DateInput(forms.DateField):
     input_type = 'date'
@@ -14,17 +14,32 @@ class FechaForm(forms.Form):
 class AtomizadoForm(ModelForm):
     class Meta:
         model = Atomizado
-        fields = ['fecha', 'hora', 'codigo', 'nroSilo', 'humedad', 'observaciones', 'planta', 'barbotina',
-                  'granulometria']
+        fields = ['fecha', 'hora', 'codigo', 'nroSilo', 'humedad', 'observaciones', 'planta', 'barbotina', 'granulometria']
         widgets = {
-
             'nroSilo': forms.TextInput(attrs={'type': 'number'}),
         }
 
     def __init__(self, *args, **kwargs):
         super(AtomizadoForm, self).__init__(*args, **kwargs)
-        self.fields['barbotina'] = forms.ModelChoiceField(queryset=Barbotina.objects.order_by('-fecha')[:10])
-        self.fields['granulometria'] = forms.ModelChoiceField(queryset=Granulometria.objects.order_by('-fecha')[:10])
+
+# Obtenemos el último registro
+        ultima_barbotina = Barbotina.objects.latest('fecha')
+        ultima_granulometria = Granulometria.objects.latest('fecha')
+
+# Agrega las opciones del último registro automáticamente en el formulario
+
+        self.fields['barbotina'].queryset |= Barbotina.objects.filter(pk=ultima_barbotina.pk)
+        self.fields['granulometria'].queryset |= Granulometria.objects.filter(pk=ultima_granulometria.pk)
+# Limita las opciones a los últimos 10 registros
+        self.fields['barbotina'].widget.choices = [(obj.pk, str(obj)) for obj in Barbotina.objects.order_by('-id')[:10]]
+        self.fields['granulometria'].widget.choices = [(obj.pk, str(obj)) for obj in Granulometria.objects.order_by('-id')[:10]]
+
+
+
+#    def __init__(self, *args, **kwargs):
+#        super(AtomizadoForm, self).__init__(*args, **kwargs)
+#        self.fields['barbotina'] = forms.ModelChoiceField(queryset=Barbotina.objects.order_by('-fecha')[:10])
+#        self.fields['granulometria'] = forms.ModelChoiceField(queryset=Granulometria.objects.order_by('-fecha')[:10])
 #        self.fields['barbotina'].queryset = Barbotina.objects.order_by('-fecha')[:15]
 #        self.fields['granulometria'].queryset = Granulometria.objects.order_by('-fecha')[:15]
 
@@ -53,3 +68,24 @@ class GranulometriaForm(ModelForm):
             'fondo': TextInput(attrs={'type': 'decimal'}),
 
         }
+
+class FiltroAtomizadoForm(forms.Form):
+    start_date = forms.DateField(label='Fecha de inicio', required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    end_date = forms.DateField(label='Fecha de fin', required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    planta_choices = [
+        ('1', 'planta 1'),
+        ('2', 'planta 2'),
+        ('3', 'planta 3'),
+    ]
+    planta = forms.ChoiceField(label='Planta', required=False, choices=planta_choices)
+
+
+class FiltroBarbotinaForm(forms.Form):
+    start_date = forms.DateField(label='Fecha de inicio', required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    end_date = forms.DateField(label='Fecha de fin', required=False, widget=forms.DateInput(attrs={'type': 'date'}))
+    planta_choices = [
+        ('1', 'planta 1'),
+        ('2', 'planta 2'),
+        ('3', 'planta 3'),
+    ]
+    planta = forms.ChoiceField(label='Planta', required=False, choices=planta_choices)

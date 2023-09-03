@@ -1,157 +1,123 @@
 {% extends 'base.html' %}
 {% block content %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-
-    <div class="container mt-5">
-        <h2 class="mb-3"><b>En este gráfico se muestra el comportamiento de la barbotina (Densidad y Viscosidad)</b></h2>
-        <h3 class="mb-3"><b>Seleccione el rango de fecha</b></h3>
+<div class="container mt-5">
+    <h4 class="mb-3"><em>Este gráfico muestra el control de parámetros de la barbotina</em></h4>
+    <h5 class="mb-3"><em>Seleccione el rango de fecha y el número de planta</em></h5>
+    <form method="get" action="{% url 'grafico2' %}" class="form-inline">
         <div class="row mb-3">
             <div class="col-md-3">
-                <label for="start_date" class="form-label">Fecha de inicio:</label>
-                <input type="date" id="start_date" class="form-control">
+                <label for="{{ form.start_date.id_for_label }}" class="form-label">Fecha de inicio:</label>
+                {{ form.start_date }}
             </div>
             <div class="col-md-3">
-                <label for="end_date" class="form-label">Fecha de fin:</label>
-                <input type="date" id="end_date" class="form-control">
+                <label for="{{ form.end_date.id_for_label }}" class="mr-2">Fecha de fin:</label>
+                {{ form.end_date }}
             </div>
-             <div class="col-md-3">
-                <label for="numero_planta" class="form-label">Número de Planta:</label>
-                <select id="numero_planta" class="form-control">
-                    <option value="">Todas</option>
-                    <option value="1">Planta 1</option>
-                    <option value="2">Planta 2</option>
-                    <option value="3">Planta 3</option>
-                </select>
+            <div class="col-md-3">
+                <label for="{{ form.planta.id_for_label }}" class="mr-2">Planta:</label>
+                {{ form.planta }}
             </div>
-            <div class="col-md-2">
-                <button onclick="filterData()" class="btn btn-primary mt-4">Filtrar</button>
-            </div>
-    </div>
-    <br><br>
-        <div id="chart"></div>
-    </div>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2">Filtrar</button>
+    </form>
 
-        <script>
-            var datos_grafico = {{ datos_grafico|safe }};
-            var initialLabels = datos_grafico.labels;
-            var initialViscosidades = datos_grafico.viscosidades;
-            var initialResiduos = datos_grafico.residuos;
+    {% if no_data_message %}
+    <p>{{ no_data_message }}</p>
+    {% else %}
+    <div id="chart"></div>
+    {% endif %}
+</div>
 
-            function filterData() {
-                var start_date = document.getElementById('start_date').value;
-                var end_date = document.getElementById('end_date').value;
-                var planta = document.getElementById('planta')
-
-                var filteredLabels = [];
-                var filteredViscosidades = [];
-                var filteredResiduos = [];
-
-                for (var i = 0; i < initialLabels.length; i++) {
-                    if (
-                        (start_date <= initialLabels[i] && initialLabels[i] <= end_date) &&
-                        (!planta || planta === 'Todas' || planta === initialPlantas[i])
-                    ){
-                        filteredLabels.push(initialLabels[i]);
-                        filteredViscosidades.push(initialViscosidades[i]);
-                        filteredResiduos.push(initialResiduos[i]);
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    var options = {
+        chart: {
+            height: 350,
+            type: "bar",
+            stacked: false
+        },
+        dataLabels: {
+            enabled: false
+        },
+        colors: ["#FF1654", "#247BA0"],
+        series: [
+            {
+                name: "Viscosidad",
+                data: {{ datos_grafico.viscosidades|safe }}
+            },
+            {
+                name: "Residuo",
+                data: {{ datos_grafico.residuos|safe }}
+            }
+        ],
+        stroke: {
+            width: [1, 1]
+        },
+        plotOptions: {
+            bar: {
+                columnWidth: "40%"
+            }
+        },
+        xaxis: {
+            categories: {{ datos_grafico.labels|safe }}
+        },
+        yaxis: [
+            {
+                axisTicks: {
+                    show: true
+                },
+                axisBorder: {
+                    show: true,
+                    color: "#FF1654"
+                },
+                labels: {
+                    style: {
+                        colors: "#FF1654"
+                    }
+                },
+                title: {
+                    text: "Viscosidad",
+                    style: {
+                        color: "#FF1654"
                     }
                 }
-
-                var options = {
-                  chart: {
-                    height: 350,
-                    type: "line",
-                    stacked: false
-                  },
-                  dataLabels: {
-                    enabled: false
-                  },
-                  colors: ["#FF1654", "#247BA0"],
-                  series: [
-                    {
-                      name: "Viscosidad",
-                      data: filteredViscosidades
-                    },
-                    {
-                      name: "Residuo",
-                      data: filteredResiduos
+            },
+            {
+                opposite: true,
+                axisTicks: {
+                    show: true
+                },
+                axisBorder: {
+                    show: true,
+                    color: "#247BA0"
+                },
+                labels: {
+                    style: {
+                        colors: "#247BA0"
                     }
-                  ],
-                  stroke: {
-                    width: [1, 1]
-                  },
-                  plotOptions: {
-                    bar: {
-                      columnWidth: "40%"
-                    }
-                  },
-                  xaxis: {
-                    categories: filteredLabels
-                  },
-                  yaxis: [
-                    {
-                      axisTicks: {
-                        show: true
-                      },
-                      axisBorder: {
-                        show: true,
-                        color: "#FF1654"
-                      },
-                      labels: {
-                        style: {
-                          colors: "#FF1654"
-                        }
-                      },
-                      title: {
-                        text: "Viscosidad",
-                        style: {
-                          color: "#FF1654"
-                        }
-                      }
-                    },
-                    {
-                      opposite: true,
-                      axisTicks: {
-                        show: true
-                      },
-                      axisBorder: {
-                        show: true,
+                },
+                title: {
+                    text: "Residuo",
+                    style: {
                         color: "#247BA0"
-                      },
-                      labels: {
-                        style: {
-                          colors: "#247BA0"
-                        }
-                      },
-                      title: {
-                        text: "Residuo",
-                        style: {
-                          color: "#247BA0"
-                        }
-                      }
                     }
-                  ],
-                  tooltip: {
-                    shared: false,
-                    intersect: true,
-                    x: {
-                      show: false
-                    }
-                  },
-                  legend: {
-                    horizontalAlign: "left",
-                    offsetX: 40
-                  }
-               };
-
-                var chart = new ApexCharts(document.querySelector("#chart"), options);
-
-                chart.render();
+                }
             }
+        ],
+        tooltip: {
+            shared: false,
+            intersect: true,
+            x: {
+                show: false
+            }
+        },
+        legend: {
+            horizontalAlign: "left",
+            offsetX: 40
+        }
+    };
 
-            filterData();
-
-        </script>
-    </body>
+    var chart = new ApexCharts(document.querySelector("#chart"), options);
+    chart.render();
+</script>
 {% endblock %}
